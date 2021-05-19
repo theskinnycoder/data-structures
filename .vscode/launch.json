@@ -1,0 +1,35 @@
+{
+  "configurations": [
+    {
+      "name": "deBug",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/out/${fileBasenameNoExtension}.out",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "MIMode": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ],
+      "preLaunchTask": "Compile",
+      "externalConsole": false,
+      "internalConsoleOptions": "openOnSessionStart",
+      "miDebuggerPath": "/usr/bin/gdb",
+      "windows": {
+        "program": "${workspaceFolder}/out/${fileBasenameNoExtension}.exe",
+        "miDebuggerPath": "<Path to gdb.exe>"
+      },
+      "osx": {
+        "program": "${workspaceFolder}/out/${fileBasenameNoExtension}",
+        "miDebuggerPath": "/usr/bin/lldb",
+        "MIMode": "lldb"
+      }
+    }
+  ]
+}

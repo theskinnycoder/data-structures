@@ -1,0 +1,10 @@
+# Directories
+**/out/
+**/bin/
+**/.git/
+
+# Files
+**/.vscode/settings.json
+**/*.exe
+**/*.out
+**/Notes*.md
