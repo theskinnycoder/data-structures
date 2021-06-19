@@ -53,9 +53,9 @@ sudo snap install code --classic
 
 ### **c) Mac**
 
-1.  Visit [VSCode](https://www.code.visualstudio.com).
-2.  Download the MacOS 'Stable' version.
-3.  Follow the installation steps by running the downloaded file
+1. Visit [VSCode](https://www.code.visualstudio.com).
+2. Download the MacOS 'Stable' version.
+3. Follow the installation steps by running the downloaded file
 
 ---
 
@@ -63,24 +63,26 @@ sudo snap install code --classic
 
 ### **a) Install the Extensions :**
 
-- Search for the **C/C++**, and **C++ Intellisense** extensions and install them.
+- Search for the **[C/C++](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools)**, and **[C++ Intellisense](https://marketplace.visualstudio.com/items?itemName=austin.code-gnu-global)** extensions and install them.
 - You get language-support, auto-complete and intellisense features through these extensions.
 
 > ### Create a **`.vscode/`** folder in your project root.
+
+---
 
 ### **b) The `c_cpp_properties.json` file :**
 
 1. Create a **`c_cpp_properties.json`** file in **`.vscode/`**
 2. Add the following to the file :
 
-```json
+```jsonc
 {
   "configurations": [
     {
       "name": "Windows",
       "includePath": ["${workspaceFolder}/**"],
       "defines": ["_DEBUG", "UNICODE", "_UNICODE"],
-      "compilerPath": "<Path to gcc.exe>",
+      "compilerPath": "C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/gcc.exe",
       "cStandard": "c17",
       "intelliSenseMode": "gcc-x64"
     },
@@ -105,12 +107,14 @@ sudo snap install code --classic
 }
 ```
 
+---
+
 ### **c) The `tasks.json` file :**
 
 1. Create a **`tasks.json`** file in **`.vscode/`**
 1. Add the following to the file :
 
-```json
+```jsonc
 {
   "version": "2.0.0",
   "type": "shell",
@@ -120,24 +124,24 @@ sudo snap install code --classic
     "focus": true,
     "panel": "shared",
     "showReuseMessage": false,
-    "clear": true,
-    "echo": false
+    "clear": false,
+    "echo": true
   },
+
   "tasks": [
     // Compile Task
     {
       "type": "shell",
       "label": "Compile",
-      "command": "/usr/bin/gcc",
-      "args": ["-g", "${file}", "-o", "out/${fileBasenameNoExtension}.out"],
+      "command": "gcc",
+      "args": ["-g", "${file}", "-o", "out/${fileBasenameNoExtension}.exe"],
       "options": {
         "cwd": "${workspaceFolder}"
       },
       "group": "build",
-      "windows": {
-        "command": "gcc",
-        "args": ["-g", "${file}", "-o", "out/${fileBasenameNoExtension}.exe"],
-        "problemMatcher": "$msCompile"
+      "linux": {
+        "command": "/usr/bin/gcc",
+        "args": ["-g", "${file}", "-o", "out/${fileBasenameNoExtension}.out"]
       },
       "osx": {
         "command": "clang",
@@ -149,15 +153,15 @@ sudo snap install code --classic
     {
       "type": "shell",
       "label": "Run",
-      "command": "out/${fileBasenameNoExtension}.out",
+      "command": "out/${fileBasenameNoExtension}.exe",
       "promptOnClose": false,
       "dependsOn": ["Compile"],
       "group": {
         "kind": "build",
         "isDefault": true
       },
-      "windows": {
-        "command": "out/${fileBasenameNoExtension}.exe"
+      "linux": {
+        "command": "out/${fileBasenameNoExtension}.out"
       },
       "osx": {
         "command": "out/${fileBasenameNoExtension}"
@@ -167,19 +171,20 @@ sudo snap install code --classic
 }
 ```
 
+---
+
 ### **d) The `launch.json` file :**
 
 1. Create a **`launch.json`** file in **`.vscode/`**
 2. Add the following to the file :
 
-```json
+```jsonc
 {
   "configurations": [
     {
       "name": "deBug",
       "type": "cppdbg",
       "request": "launch",
-      "program": "${workspaceFolder}/out/${fileBasenameNoExtension}.out",
       "args": [],
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
@@ -195,10 +200,11 @@ sudo snap install code --classic
       "preLaunchTask": "Compile",
       "externalConsole": false,
       "internalConsoleOptions": "openOnSessionStart",
-      "miDebuggerPath": "/usr/bin/gdb",
-      "windows": {
-        "program": "${workspaceFolder}/out/${fileBasenameNoExtension}.exe",
-        "miDebuggerPath": "<Path to gdb.exe>"
+      "program": "${workspaceFolder}/out/${fileBasenameNoExtension}.exe",
+      "miDebuggerPath": "C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/gdb.exe",
+      "linux": {
+        "program": "${workspaceFolder}/out/${fileBasenameNoExtension}.out",
+        "miDebuggerPath": "/usr/bin/gdb"
       },
       "osx": {
         "program": "${workspaceFolder}/out/${fileBasenameNoExtension}",
