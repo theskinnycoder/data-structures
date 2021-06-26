@@ -201,16 +201,16 @@ sudo snap install code --classic
       "externalConsole": false,
       "internalConsoleOptions": "openOnSessionStart",
       "program": "${workspaceFolder}/out/${fileBasenameNoExtension}.exe",
-      "miDebuggerPath": "C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/gdb.exe",
-<!--       "linux": {
-        "program": "${workspaceFolder}/out/${fileBasenameNoExtension}.out",
-        "miDebuggerPath": "/usr/bin/gdb"
-      },
-      "osx": {
-        "program": "${workspaceFolder}/out/${fileBasenameNoExtension}",
-        "miDebuggerPath": "/usr/bin/lldb",
-        "MIMode": "lldb"
-      } -->
+      "miDebuggerPath": "C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/gdb.exe"
+      // "linux": {
+      //   "program": "${workspaceFolder}/out/${fileBasenameNoExtension}.out",
+      //   "miDebuggerPath": "/usr/bin/gdb"
+      // },
+      // "osx": {
+      //   "program": "${workspaceFolder}/out/${fileBasenameNoExtension}",
+      //   "miDebuggerPath": "/usr/bin/lldb",
+      //   "MIMode": "lldb"
+      // }
     }
   ]
 }
